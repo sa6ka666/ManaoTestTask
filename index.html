@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <title>MANAO TEST TASK</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+ </head>
+ <body>
+     <h4 id="successAuth"></h4>
+     <div class="row" id="form">
+        <div class="col s12 m3">
+            <div class="collection">
+            <form id="registration">
+                <h4>REGISTRATION</h4>
+                <p id="errors"></p>
+                <p><b>Your login:</b><br>
+                <input type="text" id = "login" required>
+                <p><b>Your e-mail:</b><br>
+                <input type="email" id = "email" required>
+                <p><b>Your name:</b><br>
+                <input type="text" id = "name" required>
+                <p><b>Your password:</b><br>
+                <input type="password" id = "password" required>
+                <p><b>Confirm your password:</b><br>
+                <input type="password" id = "confirmPassword" required>
+                <button class="btn waves-effect waves-light" id="registration">Registry</button>
+            </form>
+            <form id="authentification">
+                <h4>AUTHENTIFICATION</h4>
+                <p><b>Your login:</b><br>
+                <input type="text" id="login_auth" required>
+                <p><b>Your password:</b><br>
+                <input type="password" id="password_auth" required><br>
+                <button class="btn waves-effect waves-light" id="authentification">Login</button>
+            </form>
+       </div>
+     </div>
+     
+    <script>
+        $('#registration').submit(function(e)
+        {
+        e.preventDefault();
+        var params = {
+                login: $("#login").val(),
+                email: $("#email").val(),
+                name : $("#name").val(),
+                password : $("#password").val(),
+                confirmPassword : $("#confirmPassword").val(),
+            }
+            $.post("http://localhost/manaotesttask/registration.php", params, function(data){
+                $("#errors").html(data);
+            });
+        });
+        $('#authentification').submit(function(e)
+        {
+        e.preventDefault();
+        var params = {
+                login: $("#login_auth").val(),
+                password : $("#password_auth").val(),
+            }
+            $.post("http://localhost/manaotesttask/authentification.php", params, function(data){
+                $("#successAuth").html(data);
+                $("#form").hide();
+            });
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
+ </body>
+</html>
